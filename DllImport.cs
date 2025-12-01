@@ -15,59 +15,8 @@ namespace WPFShowAllPeocessApp
         public const uint STATUS_INFO_LENGTH_MISMATCH = 0xC0000004;
 
         [DllImport("ntdll.dll", CharSet = CharSet.Auto)]
-        public static extern uint NtQuerySystemInformation(SYSTEM_INFORMATION_CLASS systeminfomationclaa, IntPtr systeminfomation, int systeminfomationLength, out int returnLength);
-
-        public enum SYSTEM_INFORMATION_CLASS
-        {
-            SystemBasicInformation = 0x00, //系统基本信息，如处理器数量 返回结构 SYSTEM_BASIC_INFORMATION
-            SystemPerformanceInformation = 0x02, //系统性能统计信息 返回结构 SYSTEM_PERFORMANCE_INFORMATION
-            SystemProcessorPerformanceInformation = 0x04, //系统处理器性能信息 返回结构 SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION 
-            SystemProcessInformation = 0x05, //系统进程和线程信息 返回结构 SYSTEM_PROCESS_INFORMATION
-            SystemCallCountInformation = 0x07, //系统调用计数信息
-            SystemConfigurationInformation = 0x08, //系统配置信息
-            SystemModuleInformation = 0x11, //系统模块（内核驱动程序）信息 RTL_PROCESS_MODULES
-            SystemFileCacheInformation = 0x21, //系统文件缓存信息 SYSTEM_FILECACHE_INFORMATION
-            SystemInterruptInformation = 0x23, //系统中断信息 SYSTEM_INTERRUPT_INFORMATION
-            SystemLookasideInformation = 0x45, //系统 Lookaside 列表信息
-            SystemPolicyInformation = 0x46, //系统策略信息
-            SystemRegistryQuotaInformation = 0x47, //系统注册表配额信息
-            SystemTimeZoneInformation = 0x48, //系统时区信息 TIME_ZONE_INFORMATION
-        }
-        [StructLayout(LayoutKind.Sequential)]
-        public struct UNICODE_STRING
-        {
-            public ushort Length;
-            public ushort MaximumLength;
-            public IntPtr Buffer;
-        }
-        public struct SYSTEM_PROCESS_INFORMATION
-        {
-            public uint NextEntryOffset;    // ULONG
-            public uint NumberOfThreads;    // ULONG
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 48)]
-            public byte[] Reserved1;        // SYSTEM_TIME + etc
-            public UNICODE_STRING ImageName;
-            public int BasePriority;        // KPRIORITY
-            public IntPtr UniqueProcessId;  // HANDLE
-            public IntPtr InheritedFromUniqueProcessId;
-            public uint HandleCount;        // ULONG
-            public uint SessionId;          // ULONG
-            public UIntPtr PageDirectoryBase; // SIZE_T
-            public UIntPtr PeakVirtualSize;
-            public UIntPtr VirtualSize;
-            public uint PageFaultCount;
-            public UIntPtr PeakWorkingSetSize;
-            public UIntPtr WorkingSetSize;
-            public UIntPtr QuotaPeakPagedPoolUsage;
-            public UIntPtr QuotaPagedPoolUsage;
-            public UIntPtr QuotaPeakNonPagedPoolUsage;
-            public UIntPtr QuotaNonPagedPoolUsage;
-            public UIntPtr PagefileUsage;
-            public UIntPtr PeakPagefileUsage;
-            public UIntPtr PrivatePageCount;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
-            public long[] Reserved7;
-        }
+        public static extern uint NtQuerySystemInformation();
+        
         public enum SystemProcessName
         {
             // 系统核心进程 
